@@ -2,7 +2,7 @@
   <!-- Layout Content -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
-      <sildebarmenu />
+      <sildebarmenu v-if="store.get_token"/>
 
       <!-- Layout page -->
       <div class="layout-page">
@@ -11,6 +11,7 @@
         <nav
           class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
           id="layout-navbar"
+          v-if="store.get_token"
         >
           <!--  Brand demo (display only for navbar-full and hide on below xl) -->
 
@@ -138,15 +139,13 @@
         <div class="content-wrapper">
           <!-- Content -->
           <div class="container-xxl flex-grow-1 container-p-y">
-
             <router-view></router-view>
-
           </div>
           <!-- / Content -->
 
           <!-- Footer -->
           <!-- Footer-->
-          <footer class="content-footer footer bg-footer-theme">
+          <footer class="content-footer footer bg-footer-theme" v-if="store.get_token">
             <div
               class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column"
             >
@@ -207,10 +206,16 @@
 
 <script>
 import Menu from "./components/Menu.vue";
+import { useStore } from "./store/auth";
+
 export default {
   components: { Menu },
   name: "MiniposApp",
 
+  setup() {
+    const store = useStore();
+    return { store };
+  },
   data() {
     return {};
   },

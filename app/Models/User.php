@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;    //ເພີ່ມໃໝ່
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -42,4 +44,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // ເພີ່ມ Code
+
+    // @return mixed
+    public function getJWTIdentifier(){
+        return $this->getKey();
+    }
+
+    // @return array
+    public function getJWTCustomClaims(){
+        return[];
+    }
 }

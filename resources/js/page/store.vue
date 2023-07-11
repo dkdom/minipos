@@ -5,8 +5,15 @@
 </template>
 
 <script>
+import {useStore} from '../store/auth'
+
 export default {
     name: 'MiniposStore',
+
+    setup(){
+        const store = useStore()
+        return {store}
+    },
 
     data() {
         return {
